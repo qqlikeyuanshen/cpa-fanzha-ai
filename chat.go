@@ -18,7 +18,7 @@ import (
 
 // The current public H5 build is K8SZW: it uses /api/ai/chat?type=0,
 // not the production-only /api/chat/stream route or an OpenAI reverse proxy.
-// Protocol overview: docs/PROTOCOL.md. No upstream JavaScript is redistributed.
+// No upstream JavaScript is redistributed.
 const chatTimeout = 180 * time.Second
 const maxSSEFrame = 1 << 20
 const maxChatOutput = 8 << 20
