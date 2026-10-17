@@ -1,0 +1,42 @@
+name: Build and test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux-amd64:
+    runs-on: ubuntu-22.04
+    env:
+      CGO_ENABLED: '1'
+      GOTOOLCHAIN: local
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit tests, race detector, vet, page checks and secret scan
+        run: bash scripts/test.sh
+      - name: Build native shared library
+        run: bash scripts/build.sh
+      - name: Offline native ABI smoke test
+        run: python3 scripts/check-abi.py dist/fanzha-v0.2.5-rewrite-linux-amd64.so
+      - name: Upload build for manual review (not a release)
+        uses: actions/upload-artifact@v4
+        with:
+          name: fanzha-linux-amd64
+          path: |
+            dist/*.so
+            dist/*.so.sha256
+            LICENSE
+            NOTICE.md
+            licenses/
+          if-no-files-found: error
+          retention-days: 14

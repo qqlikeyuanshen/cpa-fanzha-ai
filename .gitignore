@@ -1,0 +1,47 @@
+# Build outputs (publish separately as reviewed release assets)
+/dist/
+/build/
+*.so
+*.dll
+*.dylib
+*.a
+*.o
+*.exe
+*.test
+coverage.out
+
+# Credentials, local configuration, logs and browser state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*.json
+*service-account*.json
+fanzha-*.json
+vertex-*.json
+config.yaml
+config.yml
+/auth/
+/auths/
+/.cli-proxy-api/
+/private/
+/local/
+/logs/
+/backups/
+*.log
+*.sqlite*
+*.db
+*browser*profile*/
+
+# Editor/OS/cache files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+*.tmp
+*.bak

@@ -1,0 +1,14 @@
+# CPA v8 configuration fragment. Merge into your existing plugins section;
+# do not replace the complete CPA config or expose management without authentication.
+plugins:
+  enabled: true
+  dir: plugins
+  configs:
+    fanzha:
+      enabled: true
+      upstream_url: https://xzfzznt.gaj.sh.gov.cn
+      # Your own CPA HTTPS origin, not the upstream website.
+      public_base_url: https://cpa.example.com
+      # true: direct upstream HTTPS; false: honor the process environment proxy.
+      direct_http: true
+      refresh_interval_seconds: 300
